@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+    <div id="app">
+<!--        <el-button @click="visible = true">Button</el-button>-->
+<!--        <el-dialog :visible.sync="visible" title="Hello world">-->
+<!--            <p>Try Element</p>-->
+<!--        </el-dialog>-->
+
+        <section>
+            <div style="margin: 20px"><h2>万智牌STX斯翠海文轮抓单卡点评</h2></div>
+<!--            <el-button type="primary">白</el-button>-->
+<!--            <el-button type="primary">蓝</el-button>-->
+<!--            <el-button type="primary">黑</el-button>-->
+<!--            <el-button type="primary">红</el-button>-->
+<!--            <el-button type="primary">绿</el-button>-->
+
+            <div style="margin: 20px">
+                <el-table :data="cardsSTX" max-height="1000" border stripe>
+<!--                    <el-table-column v-for="column in cardRankTableColumns" :key="cardRankTableColumns.label"-->
+<!--                                     :prop="cardRankTableColumns.nameCh"-->
+<!--                                     :label="cardRankTableColumns.label"-->
+<!--                                     align="center">-->
+<!--                    </el-table-column>-->
+                    <el-table-column v-for="column in showCardRankTableColumns" :key="column.label"
+                                     :prop="column.value"
+                                     :label="column.label"
+                                     :class-name="column.className"
+                                     :width="column.width"
+                                     align="center">
+                        <template v-slot:default="scope" v-if="column.columnType === 'img'">
+                            <img :src="scope.row[column.value]">
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
+
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            <p><strong>本文作者魔法绵羊陈鸣阳。本系列的魔法绵羊单卡点评将独家发布在营地</strong></p>
+            <p>说明和概述详见【白色】的开头部分。</p>
+            <p>周五小病睡了一天，今天多接触接触牌了之后，应该会有更确定评价。</p>
+            【魔法绵羊】斯翠海文限制赛单卡点评 黑绿/红蓝双色 无色
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 白色</div><a href="https://www.iyingdi.com/tz/post/2370135">【魔法绵羊】斯翠海文限制赛单卡点评 白色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 蓝色</div><a href="https://www.iyingdi.com/tz/post/2370350">【魔法绵羊】斯翠海文限制赛单卡点评 蓝色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 黑色</div><a href="https://www.iyingdi.com/tz/post/2370801">【魔法绵羊】斯翠海文限制赛单卡点评 黑色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 红色</div><a href="https://www.iyingdi.com/tz/post/2371268">【魔法绵羊】斯翠海文限制赛单卡点评 红色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 绿色</div><a href="https://www.iyingdi.com/tz/post/2371508">【魔法绵羊】斯翠海文限制赛单卡点评 绿色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 黑白/红白/蓝绿双色</div><a href="https://www.iyingdi.com/tz/post/2372108">【魔法绵羊】斯翠海文限制赛单卡点评 黑白/红白/蓝绿双色</a>
+            <div>【魔法绵羊】斯翠海文限制赛单卡点评 黑绿/红蓝双色 无色</div><a href="https://www.iyingdi.com/tz/post/2372949">【魔法绵羊】斯翠海文限制赛单卡点评 黑绿/红蓝双色 无色</a>
+
+        </section>
+    </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="./config.js"></script>
+<script>
+    //   import config from config
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                visible: false,
+                cardsSTX: Config.cardsSTX,
+                cardRankTableColumns: Config.cardRankTableColumns,
+                showCardRankTableColumns: [],
+            }
+        },
+        mounted: function () {
+            console.log(Config);
+            this.cardRankTableColumns.forEach(column => {
+                if (column.defaultShow) {
+                    this.showCardRankTableColumns.push(column)
+                }
+            });
+        }
+    })
+</script>
+
+</html>
